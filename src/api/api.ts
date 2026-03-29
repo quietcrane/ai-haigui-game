@@ -1,8 +1,11 @@
 import type { TStory, TVerdict } from '../types'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
+
 export async function askAI(question: string, story: TStory): Promise<string> {
   try {
-    const response = await fetch('/api/chat', {
+    const url = API_BASE_URL ? `${API_BASE_URL}/api/chat` : '/api/chat'
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
